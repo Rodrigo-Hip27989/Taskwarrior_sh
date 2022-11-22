@@ -14,7 +14,7 @@ TITULO=${0#*./}
 
 taskwarrior(){
 	local file_name="TaskList"
-	local file_directory="Android/Data__Exports/"
+	local file_directory="../../About__Software/Android/Data__Exports/"
 	choose_option_menu "$file_name" "$file_directory"
 }
 
@@ -39,7 +39,7 @@ choose_option_menu(){
 	case $opcion in
 		1) import_task ;;
 		2) export_task "${file_name}__$(date +'%Y_%m_%d_%H%M').json";;
-		3) show_file_task ;;
+		3) show_file_task "$file_directory";;
 		4) borrar_registros_tareas;;
 	esac
 	cd .. && cd ..
@@ -84,8 +84,10 @@ import_task(){
 show_file_task(){
     local cancelado
     local file_name
+    local file_directory=$1
     local file_name_and_full_path="null"
-        
+    cd "$file_directory"
+
     file_name_and_full_path=$(dialog --stdout --title "Visualizar de Archivo JSON" --fselect "$(pwd)/" 15 67)
     cancelado=$?
 
