@@ -6,19 +6,22 @@ tipo_bold_fuente_yellow="\e[1;33m"
 tipo_bold_fuente_cyan="\e[1;36m"
 tipo_bold_fuente_green="\e[1;32m"
 tipo_bold_fuente_white="\e[1;37m"
+
 #ESTILOS DE LETRAS TITULOS
 tipo_bold_fuente_green_fondo_blue="\e[1;32;44m"
+#TITULO=${0#*./}
+
+# ***************************************** VARIABLES GLOBALES
+
 TITULO=${0#*./}
-
-# ***************************************** FUNCION PRINCIPAL
-
-taskwarrior(){
-	local file_name="TaskList"
-	local file_directory="../../About__Software/Android/Data__Exports/"
-	choose_option_menu "$file_name" "$file_directory"
-}
+global_file_name="TaskList"
+global_file_directory="../../About__Software/Android/Data__Exports/"
 
 # ***************************************** MENÚ DE OPCIONES
+
+taskwarrior(){
+  choose_option_menu $global_file_name $global_file_directory
+}
 
 choose_option_menu(){
 	local file_name=$1
@@ -39,10 +42,9 @@ choose_option_menu(){
 	case $opcion in
 		1) import_task ;;
 		2) export_task "${file_name}__$(date +'%Y_%m_%d_%H%M').json";;
-		3) show_file_task "$file_directory";;
+		3) show_file_task ;;
 		4) borrar_registros_tareas;;
 	esac
-	cd .. && cd ..
     if [[ $cancelado = 0 ]]; then
         choose_option_menu "$file_name" "$file_directory"
     fi
@@ -52,7 +54,7 @@ choose_option_menu(){
 # ***************************************** OPCIONES DEL MENU - USANDO DIALOG
 
 export_task(){
-    local cancelado
+  local cancelado
 	local file_name=$1
 
     file_name=$(dialog --stdout --title "Exportación de Archivo JSON" --inputbox "\n\n Nombre del Archivo: " 12 45 "$file_name")
@@ -84,9 +86,7 @@ import_task(){
 show_file_task(){
     local cancelado
     local file_name
-    local file_directory=$1
     local file_name_and_full_path="null"
-    cd "$file_directory"
 
     file_name_and_full_path=$(dialog --stdout --title "Visualizar de Archivo JSON" --fselect "$(pwd)/" 15 67)
     cancelado=$?
@@ -200,6 +200,6 @@ mensaje_dialog_small(){
          --msgbox "$mensaje_dialog" 12 45)
 }
 
-# ***************************************** OTROS MENSAJES
+# ***************************************** Inicio
 
 taskwarrior
