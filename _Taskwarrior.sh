@@ -15,7 +15,7 @@ tipo_bold_fuente_green_fondo_blue="\e[1;32;44m"
 
 TITULO=${0#*./}
 global_file_name="TaskList"
-global_file_directory="../../About__Software/Android/Data__Exports/"
+global_file_directory="../../../About__Software/Android/Data__Exports/"
 
 # ***************************************** MENÚ DE OPCIONES
 
@@ -40,9 +40,9 @@ choose_option_menu(){
               4 " Borrar Registro de Tareas Eliminadas")
     cancelado=$?
 	case $opcion in
-		1) import_task ;;
+		1) import_task;;
 		2) export_task "${file_name}__$(date +'%Y_%m_%d_%H%M').json";;
-		3) show_file_task ;;
+		3) show_file_task;;
 		4) borrar_registros_tareas;;
 	esac
     if [[ $cancelado = 0 ]]; then
