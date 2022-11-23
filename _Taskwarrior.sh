@@ -54,7 +54,7 @@ choose_option_menu(){
 # ***************************************** OPCIONES DEL MENU - USANDO DIALOG
 
 export_task(){
-  local cancelado
+  local cancelado=0
 	local file_name=$1
 
     file_name=$(dialog --stdout --title "Exportación de Archivo JSON" --inputbox "\n\n Nombre del Archivo: " 12 45 "$file_name")
@@ -68,8 +68,8 @@ export_task(){
 }
 
 import_task(){
-    local cancelado
-    local file_name
+    local cancelado=0
+    local file_name=""
     local file_name_and_full_path="null"
 
     file_name_and_full_path=$(dialog --stdout --title "Importación de Archivo JSON" --fselect "$(pwd)/" 15 67)
@@ -84,8 +84,8 @@ import_task(){
 }
 
 show_file_task(){
-    local cancelado
-    local file_name
+    local cancelado=0
+    local file_name=""
     local file_name_and_full_path="null"
 
     file_name_and_full_path=$(dialog --stdout --title "Visualizar de Archivo JSON" --fselect "$(pwd)/" 15 67)
